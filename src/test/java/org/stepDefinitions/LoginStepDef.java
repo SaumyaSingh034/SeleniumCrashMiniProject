@@ -1,10 +1,20 @@
 package org.stepDefinitions;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.pages.LoginPage;
 
 public class LoginStepDef {
+
+    private LoginPage loginPage;
+    private WebDriver driver;
+
+
 
     @Given("user should be on OpenCart Application")
     public void user_should_be_on_open_cart_application() {
