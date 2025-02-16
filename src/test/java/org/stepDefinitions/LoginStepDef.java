@@ -12,9 +12,23 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.pages.LoginPage;
 import org.testng.Assert;
 
-public class LoginStepDef extends Hooks {
+public class LoginStepDef  {
 
     private LoginPage loginPage;
+    private WebDriver driver;
+
+    @Before
+    public void setUp(){
+        driver = new ChromeDriver();
+    }
+
+
+    @After
+    public void tearDown(){
+        if(driver!=null){
+            driver.quit();
+        }
+    }
 
 
 
@@ -39,7 +53,7 @@ public class LoginStepDef extends Hooks {
     @Then("user should be logged in successfully")
     public void user_should_be_logged_in_successfully() {
         String title = loginPage.getTitleOfPage();
-        Assert.assertEquals(title, "");
+        Assert.assertEquals(title, "Account Login");
     }
     
     @Given("user entered invalid {string} and {string}")

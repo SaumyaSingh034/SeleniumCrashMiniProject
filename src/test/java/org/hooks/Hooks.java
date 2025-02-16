@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Hooks {
 
-    public static WebDriver driver;
+    private WebDriver driver;
 
     @Before
     public void setUp(){
