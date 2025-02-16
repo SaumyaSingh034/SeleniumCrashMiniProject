@@ -5,58 +5,62 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.hooks.Hooks;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.pages.LoginPage;
+import org.testng.Assert;
 
-public class LoginStepDef {
+public class LoginStepDef extends Hooks {
 
     private LoginPage loginPage;
-    private WebDriver driver;
 
 
 
     @Given("user should be on OpenCart Application")
     public void user_should_be_on_open_cart_application() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        driver.get("https://naveenautomationlabs.com/opencart/index.php?route=account/login");
+        loginPage = new LoginPage(driver);
     }
 
     @Given("user has enter valid username and password")
     public void user_has_enter_valid_username_and_password() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        loginPage.enterEmail("");
+        loginPage.enterPassword("");
+
     }
 
     @When("user click on login button")
     public void user_click_on_login_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        loginPage.clickOnLoginBtn();
     }
 
     @Then("user should be logged in successfully")
     public void user_should_be_logged_in_successfully() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        String title = loginPage.getTitleOfPage();
+        Assert.assertEquals(title, "");
     }
     
     @Given("user entered invalid {string} and {string}")
-    public void user_entered_invalid_and(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void user_entered_invalid_and(String username, String password) {
+        loginPage.enterEmail(username);
+        loginPage.enterPassword(password);
     }
 
     @Then("user should get error message {string}")
     public void user_should_get_error_message(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Assert.assertEquals(driver.findElement(By.cssSelector(".alert-danger")).isDisplayed(), true);
     }
 
     @When("user click on {string} link")
     public void userClickOnLink(String linkName) {
+        loginPage.clickOnForgetPasswordLink();
     }
 
     @Then("user should be redirected to the password reset page")
     public void userShouldBeRedirectedToThePasswordResetPage() {
+        Assert.assertTrue(loginPage.getForgotPwdPageUrl().contains("account/forgotten"));
+
     }
 }

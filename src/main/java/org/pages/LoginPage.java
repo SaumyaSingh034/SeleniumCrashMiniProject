@@ -16,6 +16,10 @@ public class LoginPage {
         this.driver = driver;
     }
 
+    public String getTitleOfPage(){
+        return driver.getTitle();
+    }
+
     //Methods/Actions
 
     public void enterEmail(String email){
